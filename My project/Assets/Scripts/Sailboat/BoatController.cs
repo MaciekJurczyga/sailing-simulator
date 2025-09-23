@@ -12,7 +12,9 @@ public class BoatController : MonoBehaviour
     
     public float turnSpeed = 50f;
     public float tau = 2.5f;
+    
     private float currentSpeed;
+    private Tack currentTack;
     
     public void Initialize(PhysicsModel physicsModel, WindSystem windSystem, GraphPointsWrapper graphPointsWrapper)
     {
@@ -31,7 +33,11 @@ public class BoatController : MonoBehaviour
     void FixedUpdate()
     {
         float windSpeed = _windSystem.GetWindSpeedKnots();
-        BoatData foundBoatData = _physicsModel.getBoatData(transform.eulerAngles.y);
+        float realWindAttackAngle = CalculateAttackAngle(transform.eulerAngles.y);
+        
+        UpdateCurrentTack(realWindAttackAngle);
+        
+        BoatData foundBoatData = _physicsModel.getBoatData(realWindAttackAngle);
         float leewayAngle = _physicsModel.FindLeewayAngle(foundBoatData);
         MoveBoat(foundBoatData.CalculatedBoatSpeedWithoutWindSpeed * windSpeed, leewayAngle);
         TurnBoat();
@@ -54,7 +60,18 @@ public class BoatController : MonoBehaviour
 
         _rb.MovePosition(_rb.position + Time.deltaTime * currentSpeed * driftDirection.normalized);
     }
-    
+
+    private void UpdateCurrentTack(float realWindAttackAngle)
+    {
+        if (realWindAttackAngle >= 0 && realWindAttackAngle <= 180)
+        {
+            currentTack = Tack.Left;
+        }
+        else
+        {
+            currentTack = Tack.Right;
+        }
+    }
 
     private void TurnBoat()
     {
@@ -68,5 +85,25 @@ public class BoatController : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+
+    public Tack GetCurrentTack()
+    {
+        return currentTack;
+    }
+    public float CalculateAttackAngle(float boatAngle)
+    {
+        // Calculates true wind attack angle:
+        // 0-180 left tack pl: hals
+        // 180-360 right tack
+        if (_windSystem == null) return 0f;
+
+        var trueWindAngle = _windSystem.getWindAngle();
+
+        var diff = boatAngle - trueWindAngle;
+
+        // diff is in range -180:180, return is 0-360
+        return diff >= 0 ? diff : 360 + diff;
     }
 }

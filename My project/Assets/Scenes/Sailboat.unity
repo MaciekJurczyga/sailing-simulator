@@ -1656,6 +1656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _windSystem: {fileID: 27693095}
   boatController: {fileID: 615335740}
+  sailController: {fileID: 2144077678}
   graphDrawer: {fileID: 742032596}
   windIndicatorController: {fileID: 615335745}
 --- !u!4 &405479036
@@ -6584,13 +6585,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e46b37dd5a941c1847ee04660965313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jibRotationSpeed: 50
-  fokMinAngle: -83
-  fokMaxAngle: 83
+  sailsRotationSpeed: 50
+  tackingSpeedMultiplier: 4
+  tackingAngleThreshold: 1
   bomTransform: {fileID: 8471519330147862472}
-  bomRotationSpeed: 50
-  bomMinAngle: -83
-  bomMaxAngle: 83
 --- !u!23 &10734760585585651
 MeshRenderer:
   m_ObjectHideFlags: 0

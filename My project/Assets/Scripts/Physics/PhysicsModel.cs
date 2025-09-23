@@ -90,10 +90,10 @@ public class PhysicsModel
     }
 
 
-    public BoatData getBoatData(float boatAngle)
+    public BoatData getBoatData(float targetAttackAngle)
     {
         int foundLDAir = 50; // TODO: add code to calculate this value
-        float targetAttackAngle = CalculateAttackAngle(boatAngle);
+     //   float targetAttackAngle = CalculateAttackAngle(boatAngle);
         List<BoatData> sortedBoatDataList = _sortedBoatDataListByLDAirMap[foundLDAir];
 
         if (sortedBoatDataList == null || sortedBoatDataList.Count == 0)
@@ -123,21 +123,5 @@ public class PhysicsModel
         }
 
         return closest;
-    }
-
-
-    public float CalculateAttackAngle(float boatAngle)
-    {
-        // Calculates true wind attack angle:
-        // 0-180 left tack pl: hals
-        // 180-360 right tack
-        if (_windSystem == null) return 0f;
-
-        var trueWindAngle = _windSystem.getWindAngle();
-
-        var diff = boatAngle - trueWindAngle;
-
-        // diff is in range -180:180, return is 0-360
-        return diff >= 0 ? diff : 360 + diff;
     }
 }

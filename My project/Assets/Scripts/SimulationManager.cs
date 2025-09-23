@@ -6,7 +6,7 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private WindSystem _windSystem; 
     
     public BoatController boatController;
-    
+    public SailController sailController;
     public GraphDrawer graphDrawer;
     
     public WindIndicatorController windIndicatorController;
@@ -26,7 +26,7 @@ public class SimulationManager : MonoBehaviour
         
 
         _physicsCalculator = new PhysicsCalculator();
-
+        
         _physicsModel = new PhysicsModel(_windSystem, _physicsCalculator);
         _physicsModel.LoadModel();
 
@@ -43,6 +43,11 @@ public class SimulationManager : MonoBehaviour
         else
         {
             Debug.LogError("Boat controller is not assigned to SimulationManager!", this);
+        }
+
+        if (sailController != null)
+        {
+            sailController.Initialize(boatController);
         }
 
         if (graphDrawer != null)
