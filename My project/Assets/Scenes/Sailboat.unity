@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 9de0020b793f9c84e899176edba874d3, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -6585,7 +6585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e46b37dd5a941c1847ee04660965313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sailsRotationSpeed: 50
+  sailsRotationSpeed: 35
   tackingSpeedMultiplier: 4
   tackingAngleThreshold: 1
   bomTransform: {fileID: 8471519330147862472}
