@@ -36,19 +36,20 @@ public class SimulationManager : MonoBehaviour
 
     void Start()
     {
+        if (sailController != null)
+        {
+            sailController.Initialize();
+        }
+        
         if (boatController != null)
         {
-            boatController.Initialize(_physicsModel, _windSystem, _graphPointsWrapper);
+            boatController.Initialize(_physicsModel, _windSystem, _graphPointsWrapper, sailController);
         }
         else
         {
             Debug.LogError("Boat controller is not assigned to SimulationManager!", this);
         }
-
-        if (sailController != null)
-        {
-            sailController.Initialize(boatController);
-        }
+        
 
         if (graphDrawer != null)
         {

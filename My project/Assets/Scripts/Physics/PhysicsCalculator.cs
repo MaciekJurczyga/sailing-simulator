@@ -12,7 +12,7 @@ public class PhysicsCalculator
 {
     public static int MaxLiftToDragAirRation = 5;
     private const float LiftToDragWaterRatio = 15f;
-    private const float S0 = 1.5f;
+    private float S0;
     private static float _borderAngleRad = 0;
     
     private float _sOfV;
@@ -23,6 +23,7 @@ public class PhysicsCalculator
 
     public void Calculate(float vDeg, float liftToDragAirRatio)
     {
+        S0 = determineS0(liftToDragAirRatio);
         _borderAngleRad = CalculateBorderAngleRad(liftToDragAirRatio);
         float vRad = vDeg * Mathf.Deg2Rad;
 
@@ -36,7 +37,35 @@ public class PhysicsCalculator
         _boatSpeed = CalculateBoatSpeedWithoutWindSpeed(vRad);
     }
 
-    private float CalculateBorderAngleRad(float liftToDragAirRation)
+    private float determineS0(float liftToDratAirRatio)
+    {
+        if (liftToDratAirRatio > 4.5)
+        {
+            return 1.5f;
+        } 
+        if (liftToDratAirRatio > 4)
+        {
+            return 1.25f;
+        }
+
+        if (liftToDratAirRatio > 3)
+        {
+            return 1f;
+        }
+
+        if (liftToDratAirRatio > 2)
+        {
+            return 0.7f;
+        }
+
+        if (liftToDratAirRatio > 1)
+        {
+            return 0.4f;
+        }
+
+        return 0;
+    }
+    public float CalculateBorderAngleRad(float liftToDragAirRation)
     {
         return  -(Mathf.Atan(liftToDragAirRation) - Mathf.PI);
     }
@@ -85,6 +114,7 @@ public class PhysicsCalculator
     {
         return _wDeg;
     }
+    
 
     public float GetLDWater()
     {

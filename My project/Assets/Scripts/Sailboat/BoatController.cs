@@ -9,15 +9,16 @@ public class BoatController : MonoBehaviour
     private PhysicsModel _physicsModel;
     private GraphPointsWrapper _graphPointsWrapper;
     public GraphDrawer graphDrawer;
+    private SailController _sailController;
     
     public float turnSpeed = 50f;
     public float tau = 2.5f;
     
     private float currentSpeed;
-    private Tack currentTack;
     
-    public void Initialize(PhysicsModel physicsModel, WindSystem windSystem, GraphPointsWrapper graphPointsWrapper)
+    public void Initialize(PhysicsModel physicsModel, WindSystem windSystem, GraphPointsWrapper graphPointsWrapper, SailController sailController)
     {
+        _sailController = sailController;
         _physicsModel = physicsModel;
         _windSystem = windSystem;
         _graphPointsWrapper = graphPointsWrapper;
@@ -34,10 +35,15 @@ public class BoatController : MonoBehaviour
     {
         float windSpeed = _windSystem.GetWindSpeedKnots();
         float realWindAttackAngle = CalculateAttackAngle(transform.eulerAngles.y);
+        _sailController.setCurrentTack(GetCurrentTack(realWindAttackAngle));
+        BoatData perfectBoatData = _physicsModel.getBoatDataForGivenLdAir(realWindAttackAngle, 50);
+        int foundLdAir = SailsEfectivenessCalculator.findLdAir(perfectBoatData, _sailController.getSailsAngle());
+        BoatData foundBoatData = _physicsModel.getBoatDataForGivenLdAir(realWindAttackAngle, foundLdAir);
+        if (foundBoatData.CalculatedBoatSpeedWithoutWindSpeed * windSpeed == 0)
+        {
+            foundBoatData = new BoatData(realWindAttackAngle, realWindAttackAngle, 0);
+        }
         
-        UpdateCurrentTack(realWindAttackAngle);
-        
-        BoatData foundBoatData = _physicsModel.getBoatData(realWindAttackAngle);
         float leewayAngle = _physicsModel.FindLeewayAngle(foundBoatData);
         MoveBoat(foundBoatData.CalculatedBoatSpeedWithoutWindSpeed * windSpeed, leewayAngle);
         TurnBoat();
@@ -49,6 +55,7 @@ public class BoatController : MonoBehaviour
             currentSpeed,
             windSpeed);
     }
+    
 
     private void MoveBoat(float targetSpeed, float leewayAngle)
     {
@@ -61,16 +68,14 @@ public class BoatController : MonoBehaviour
         _rb.MovePosition(_rb.position + Time.deltaTime * currentSpeed * driftDirection.normalized);
     }
 
-    private void UpdateCurrentTack(float realWindAttackAngle)
+    private Tack GetCurrentTack(float realWindAttackAngle)
     {
         if (realWindAttackAngle >= 0 && realWindAttackAngle <= 180)
         {
-            currentTack = Tack.Left;
+            return Tack.Left;
         }
-        else
-        {
-            currentTack = Tack.Right;
-        }
+
+        return Tack.Right;
     }
 
     private void TurnBoat()
@@ -86,12 +91,8 @@ public class BoatController : MonoBehaviour
     {
         return currentSpeed;
     }
-
-
-    public Tack GetCurrentTack()
-    {
-        return currentTack;
-    }
+    
+    
     public float CalculateAttackAngle(float boatAngle)
     {
         // Calculates true wind attack angle:

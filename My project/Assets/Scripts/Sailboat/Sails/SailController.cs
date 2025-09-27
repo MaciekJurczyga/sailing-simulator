@@ -27,11 +27,11 @@ public class SailController : MonoBehaviour
     private const float _rightSideMinAngle = -83f;
     private const float _rightSideMaxAngle = 0f;
 
-    private float _tackTargetAngle; 
+    private float _tackTargetAngle;
+    private Tack currentTack;
 
-    public void Initialize(BoatController boatController)
+    public void Initialize()
     {
-        _boatController = boatController;
     }
 
     void Start()
@@ -52,9 +52,7 @@ public class SailController : MonoBehaviour
 
     void Update()
     {
-        if (_boatController == null) return;
-
-        Tack currentTack = _boatController.GetCurrentTack();
+        
         SailPosition requiredSailPosition = GetRequiredSailPositionForTack(currentTack);
         
         UpdateCurrentSailPosition(requiredSailPosition);
@@ -105,7 +103,6 @@ public class SailController : MonoBehaviour
             sailControlState = SailControlState.Manual;
             currentBomAngle = _tackTargetAngle;
             currentFokAngle = _tackTargetAngle;
-            Tack currentTack = _boatController.GetCurrentTack();
             SailPosition requiredSailPosition = GetRequiredSailPositionForTack(currentTack);
             UpdateCurrentSailPosition(requiredSailPosition);
             ClampSailsToActiveSide();
@@ -120,7 +117,7 @@ public class SailController : MonoBehaviour
 
         if (Mathf.Abs(_tackTargetAngle) < tackingAngleThreshold * 2)
         {
-            Tack currentTack = _boatController.GetCurrentTack();
+            
             SailPosition requiredPosition = GetRequiredSailPositionForTack(currentTack);
 
             if (requiredPosition == SailPosition.Left)
@@ -178,5 +175,15 @@ public class SailController : MonoBehaviour
 
         Quaternion bomRotation = Quaternion.Euler(0, 0, currentBomAngle);
         bomTransform.localRotation = bomStartRotation * bomRotation;
+    }
+
+    public void setCurrentTack(Tack tack)
+    {
+        currentTack = tack;
+    }
+
+    public float getSailsAngle()
+    {
+        return currentBomAngle;
     }
 }

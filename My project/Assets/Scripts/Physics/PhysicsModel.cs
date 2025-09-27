@@ -90,11 +90,9 @@ public class PhysicsModel
     }
 
 
-    public BoatData getBoatData(float targetAttackAngle)
+    public BoatData getBoatDataForGivenLdAir(float targetAttackAngle, int foundLdAir)
     {
-        int foundLDAir = 50; // TODO: add code to calculate this value
-     //   float targetAttackAngle = CalculateAttackAngle(boatAngle);
-        List<BoatData> sortedBoatDataList = _sortedBoatDataListByLDAirMap[foundLDAir];
+        List<BoatData> sortedBoatDataList = _sortedBoatDataListByLDAirMap[foundLdAir];
 
         if (sortedBoatDataList == null || sortedBoatDataList.Count == 0)
             return new BoatData(0, 0, 0);
@@ -123,5 +121,10 @@ public class PhysicsModel
         }
 
         return closest;
+    }
+
+    public float getBorderAngleDeg(float LDair)
+    {
+      return _physics.CalculateBorderAngleRad(LDair) * Mathf.Rad2Deg;
     }
 }
