@@ -37,34 +37,45 @@ public class PhysicsCalculator
         _boatSpeed = CalculateBoatSpeedWithoutWindSpeed(vRad);
     }
 
-    private float determineS0(float liftToDratAirRatio)
+    private float determineS0(float liftToDragAirRatio)
     {
-        if (liftToDratAirRatio > 4.5)
+        if (liftToDragAirRatio > 4.5f)
         {
             return 1.5f;
-        } 
-        if (liftToDratAirRatio > 4)
+        }
+        if (liftToDragAirRatio > 4.0f)
         {
-            return 1.25f;
+            return 1.35f;
+        }
+        if (liftToDragAirRatio > 3.5f)
+        {
+            return 1.2f;
+        }
+        if (liftToDragAirRatio > 3.0f)
+        {
+            return 1.05f;
+        }
+        if (liftToDragAirRatio > 2.5f)
+        {
+            return 0.85f;
+        }
+        if (liftToDragAirRatio > 2.0f)
+        {
+            return 0.65f;
+        }
+        if (liftToDragAirRatio > 1.5f)
+        {
+            return 0.5f;
+        }
+        if (liftToDragAirRatio > 1.0f)
+        {
+            return 0.35f;
         }
 
-        if (liftToDratAirRatio > 3)
-        {
-            return 1f;
-        }
-
-        if (liftToDratAirRatio > 2)
-        {
-            return 0.7f;
-        }
-
-        if (liftToDratAirRatio > 1)
-        {
-            return 0.4f;
-        }
-
-        return 0;
+        return 0f;
     }
+    
+
     public float CalculateBorderAngleRad(float liftToDragAirRation)
     {
         return  -(Mathf.Atan(liftToDragAirRation) - Mathf.PI);

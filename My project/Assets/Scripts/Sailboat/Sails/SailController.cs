@@ -78,15 +78,31 @@ public class SailController : MonoBehaviour
 
     private void HandleManualSailControl()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
-            currentFokAngle += sailsRotationSpeed * Time.deltaTime;
-            currentBomAngle += sailsRotationSpeed * Time.deltaTime;
+            if (currentSailPosition == SailPosition.Left)
+            {
+                currentFokAngle += sailsRotationSpeed * Time.deltaTime;
+                currentBomAngle += sailsRotationSpeed * Time.deltaTime;
+            }
+            else
+            {
+                currentFokAngle -= sailsRotationSpeed * Time.deltaTime;
+                currentBomAngle -= sailsRotationSpeed * Time.deltaTime;
+            }
         }
-        else if (Input.GetKey(KeyCode.L))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
-            currentFokAngle -= sailsRotationSpeed * Time.deltaTime;
-            currentBomAngle -= sailsRotationSpeed * Time.deltaTime;
+            if (currentSailPosition == SailPosition.Left)
+            {
+                currentFokAngle -= sailsRotationSpeed * Time.deltaTime;
+                currentBomAngle -= sailsRotationSpeed * Time.deltaTime;
+            }
+            else
+            {
+                currentFokAngle += sailsRotationSpeed * Time.deltaTime;
+                currentBomAngle += sailsRotationSpeed * Time.deltaTime;
+            }
         }
         
         ClampSailsToActiveSide();
