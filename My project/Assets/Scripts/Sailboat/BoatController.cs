@@ -100,7 +100,7 @@ public class BoatController : MonoBehaviour
         // 180-360 right tack
         if (_windSystem == null) return 0f;
 
-        var trueWindAngle = _windSystem.getWindAngle();
+        var trueWindAngle = _windSystem.GetWindAngle();
 
         var diff = boatAngle - trueWindAngle;
 

@@ -19,9 +19,7 @@ public class BoatStatistics:MonoBehaviour
     {
         if (foundBoatData.wDeg == 0)
         {
-            // if boat is in dead angle, vDeg changes from lets say -30 to + 30, however to avoid nulls 
-            // we set wDeg to 0 in such cases. 
-            // in dead angle, apparent (vDeg) and true (wDeg) wind is the same, so we update _trueWindAttackAngle with actual value (from vDeg)
+           
             _trueWindAttackAngle = foundBoatData.vDeg;
         }
 
@@ -35,10 +33,10 @@ public class BoatStatistics:MonoBehaviour
 
     private void UpdateText()
     {
-        windSpeedText.text = $"Prędkość wiatru [Węzły]: {_windSpeed:F1}";
-        trueWindAngleText.text = $"Rzeczywisty kąt natarcia [°]: {_trueWindAttackAngle:F1}";
-        apparentWindAngleText.text = $"Pozorny kąt natarcia [°]: {_apparentWindAttackAngle:F1}";
-        boatSpeedText.text = $"Prędkość łodzi [węzły]: {_currentBoatSpeed:F1}";
+        windSpeedText.text = $"Wind Speed [knots]: {_windSpeed:F1}";
+        trueWindAngleText.text = $"True Wind Attack Angle [°]: {_trueWindAttackAngle:F1}";
+        apparentWindAngleText.text = $"Apparent Wind Attack Angle [°]: {_apparentWindAttackAngle:F1}";
+        boatSpeedText.text = $"Sailboat Speed [knots]: {_currentBoatSpeed:F1}";
     }
 
 
