@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class BoatController : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class BoatController : MonoBehaviour
     private GraphPointsWrapper _graphPointsWrapper;
     public GraphDrawer graphDrawer;
     private SailController _sailController;
+    public TextMeshProUGUI endOfMapText;
     
     public float turnSpeed = 50f;
     public float tau = 2.5f;
@@ -55,8 +59,24 @@ public class BoatController : MonoBehaviour
             currentSpeed,
             windSpeed);
     }
-    
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("WaterBorderTag"))
+        {
+            transform.Rotate(Vector3.up, 180f);
+
+            StartCoroutine(ShowTextForSeconds(2));
+        }
+    }
+
+    private IEnumerator ShowTextForSeconds(float seconds)
+    {
+        endOfMapText.gameObject.SetActive(true); 
+        yield return new WaitForSeconds(seconds); 
+        endOfMapText.gameObject.SetActive(false); 
+    }
+    
     private void MoveBoat(float targetSpeed, float leewayAngle)
     {
         // apply boat acceleration to target speed
