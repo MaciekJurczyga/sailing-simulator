@@ -1,4 +1,5 @@
-﻿﻿using UnityEngine;
+﻿﻿using System;
+ using UnityEngine;
 
 
 /**
@@ -39,40 +40,14 @@ public class PhysicsCalculator
 
     private float determineS0(float liftToDragAirRatio)
     {
-        if (liftToDragAirRatio > 4.5f)
+        if (liftToDragAirRatio <= 1.0f)
         {
-            return 1.5f;
-        }
-        if (liftToDragAirRatio > 4.0f)
-        {
-            return 1.35f;
-        }
-        if (liftToDragAirRatio > 3.5f)
-        {
-            return 1.2f;
-        }
-        if (liftToDragAirRatio > 3.0f)
-        {
-            return 1.05f;
-        }
-        if (liftToDragAirRatio > 2.5f)
-        {
-            return 0.85f;
-        }
-        if (liftToDragAirRatio > 2.0f)
-        {
-            return 0.65f;
-        }
-        if (liftToDragAirRatio > 1.5f)
-        {
-            return 0.5f;
-        }
-        if (liftToDragAirRatio > 1.0f)
-        {
-            return 0.35f;
+            return 0f;
         }
 
-        return 0f;
+        float result = (0.35f * liftToDragAirRatio) - 0.05f;
+
+        return Math.Min(result, 1.5f);
     }
     
 
