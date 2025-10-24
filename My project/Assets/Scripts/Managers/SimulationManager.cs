@@ -7,6 +7,8 @@ public class SimulationManager : MonoBehaviour
     
     public BoatController boatController;
     public SailController sailController;
+    public FokMaterialSwapper fokMaterialSwapper;
+    public GrotMaterialSwapper grotMaterialSwapper;
     public GraphDrawer graphDrawer;
     
     public WindIndicatorController windIndicatorController;
@@ -36,6 +38,16 @@ public class SimulationManager : MonoBehaviour
 
     void Start()
     {
+        if (fokMaterialSwapper != null)
+        {
+            fokMaterialSwapper.Initialize();
+        }
+
+        if (grotMaterialSwapper != null)
+        {
+            grotMaterialSwapper.Initialize();
+        }
+        
         if (sailController != null)
         {
             sailController.Initialize();
@@ -43,7 +55,7 @@ public class SimulationManager : MonoBehaviour
         
         if (boatController != null)
         {
-            boatController.Initialize(_physicsModel, _windSystem, _graphPointsWrapper, sailController);
+            boatController.Initialize(_physicsModel, _windSystem, _graphPointsWrapper, sailController, fokMaterialSwapper, grotMaterialSwapper);
         }
         else
         {

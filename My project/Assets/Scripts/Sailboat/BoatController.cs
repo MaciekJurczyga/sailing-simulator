@@ -6,31 +6,42 @@ using UnityEngine;
 public class BoatController : MonoBehaviour
 {
     private Rigidbody _rb;
-    private BoatStatistics _boatStatistics;
     private WindIndicatorController _windIndicatorController;
     private WindSystem _windSystem;
     private PhysicsModel _physicsModel;
+    private FokMaterialSwapper _fokMaterialSwapper;
+    private GrotMaterialSwapper _grotMaterialSwapper;
     private GraphPointsWrapper _graphPointsWrapper;
     public GraphDrawer graphDrawer;
     private SailController _sailController;
     public TextMeshProUGUI endOfMapText;
+    public Material red;
+    public Material orange;
+    public Material defaultMaterial;
     
-    public float turnSpeed = 50f;
+    public float turnSpeed = 25f;
     public float tau = 2.5f;
     
     private float currentSpeed;
     
-    public void Initialize(PhysicsModel physicsModel, WindSystem windSystem, GraphPointsWrapper graphPointsWrapper, SailController sailController)
+    public void Initialize(PhysicsModel physicsModel,
+        WindSystem windSystem,
+        GraphPointsWrapper graphPointsWrapper,
+        SailController sailController,
+        FokMaterialSwapper fokMaterialSwapper,
+        GrotMaterialSwapper grotMaterialSwapper
+        )
     {
         _sailController = sailController;
         _physicsModel = physicsModel;
         _windSystem = windSystem;
         _graphPointsWrapper = graphPointsWrapper;
+        _fokMaterialSwapper = fokMaterialSwapper;
+        _grotMaterialSwapper = grotMaterialSwapper;
     }
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _boatStatistics = GetComponent<BoatStatistics>();
         _windIndicatorController = GetComponent<WindIndicatorController>();
         _rb.isKinematic = false;
     }
@@ -47,17 +58,13 @@ public class BoatController : MonoBehaviour
         {
             foundBoatData = new BoatData(realWindAttackAngle, realWindAttackAngle, 0);
         }
-        
+        changeSailsColor(foundLdAir);
         float leewayAngle = _physicsModel.FindLeewayAngle(foundBoatData);
         MoveBoat(foundBoatData.CalculatedBoatSpeedWithoutWindSpeed * windSpeed, leewayAngle);
         TurnBoat();
         _windIndicatorController.SetWindAngle(foundBoatData);
         graphDrawer.DrawUserPoint(foundBoatData, windSpeed);
         graphDrawer.UpdateGraphView(windSpeed);
-        _boatStatistics.UpdateStats(
-            foundBoatData,
-            currentSpeed,
-            windSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -126,5 +133,25 @@ public class BoatController : MonoBehaviour
 
         // diff is in range -180:180, return is 0-360
         return diff >= 0 ? diff : 360 + diff;
+    }
+
+    private void changeSailsColor(float foundLdAir)
+    {
+        if (foundLdAir >= 25 && foundLdAir < 38)
+        {
+            _grotMaterialSwapper.SetMaterial(orange);
+            _fokMaterialSwapper.SetMaterial(orange);
+        }
+
+       else if (foundLdAir < 25)
+        {
+            _grotMaterialSwapper.SetMaterial(red);
+            _fokMaterialSwapper.SetMaterial(red);
+        }
+        else
+        {
+            _grotMaterialSwapper.SetMaterial(defaultMaterial);
+            _fokMaterialSwapper.SetMaterial(defaultMaterial);
+        }
     }
 }

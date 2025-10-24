@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
 
     public GameObject pauseMenuUI;
+    public Button logoutButton;
 
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
+        logoutButton.onClick.AddListener(HandleLogout);
         Time.timeScale = 1f;
     }
 
@@ -40,5 +44,10 @@ public class PauseManager : MonoBehaviour
         pauseMenuUI.SetActive(false); 
         Time.timeScale = 1f; 
         isPaused = false;
+    }
+
+    private void HandleLogout()
+    {
+        SceneManager.LoadScene("LoginScene");
     }
 }
