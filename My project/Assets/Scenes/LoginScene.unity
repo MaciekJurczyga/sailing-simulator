@@ -376,10 +376,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOGIN
+  m_text: "ZALOGUJ SI\u0118"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
-  m_sharedMaterial: {fileID: -2162755014695268795, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
+  m_sharedMaterial: {fileID: -7408306605157830392, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -838,10 +838,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Maciej Jurczyga's engineering thesis defence project
+  m_text: Projekt dyplomowy Macieja Jurczygi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
-  m_sharedMaterial: {fileID: -2162755014695268795, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
+  m_sharedMaterial: {fileID: -7408306605157830392, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1275,10 +1275,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'SAILING SIMULATOR '
+  m_text: "SYMULATOR \u017BEGLUGI"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
-  m_sharedMaterial: {fileID: -2162755014695268795, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
+  m_sharedMaterial: {fileID: -7408306605157830392, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1338,7 +1338,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -258.46283, w: 0}
+  m_margin: {x: -5.421936, y: 0, z: -283.5218, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2286,10 +2286,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Password
+  m_text: "Has\u0142o"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
-  m_sharedMaterial: {fileID: -2162755014695268795, guid: dca72f13eef06464088e78e7766cf84b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
+  m_sharedMaterial: {fileID: -7408306605157830392, guid: 791a6fce99dd9404c9b131d753401330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
