@@ -4547,7 +4547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &408948031
 Transform:
   m_ObjectHideFlags: 0
@@ -13876,7 +13876,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "ESC - Pauza\n\nQ - zmiana widoku\n\nA - sk\u0119t w lewo\n\nD - skr\u0119t
+  m_text: "P - Pauza\n\nQ - zmiana widoku\n\nA - sk\u0119t w lewo\n\nD - skr\u0119t
     w prawo\n\n\u2191 - luzowanie \u017Cagli\n\n\u2193 - wybieranie \u017Cagli\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fcc26c462468a3346a1fba385e659568, type: 2}
