@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Statistics;
 using TMPro;
 using UnityEngine;
 
@@ -11,10 +12,12 @@ public class BoatController : MonoBehaviour
     private PhysicsModel _physicsModel;
     private FokMaterialSwapper _fokMaterialSwapper;
     private GrotMaterialSwapper _grotMaterialSwapper;
+    private BoatIconController _boatIconController;
     private GraphPointsWrapper _graphPointsWrapper;
     public GraphDrawer graphDrawer;
     private SailController _sailController;
     public TextMeshProUGUI endOfMapText;
+    public TextMeshProUGUI boatSpeedText;
     public Material red;
     public Material orange;
     public Material defaultMaterial;
@@ -29,7 +32,8 @@ public class BoatController : MonoBehaviour
         GraphPointsWrapper graphPointsWrapper,
         SailController sailController,
         FokMaterialSwapper fokMaterialSwapper,
-        GrotMaterialSwapper grotMaterialSwapper
+        GrotMaterialSwapper grotMaterialSwapper,
+        BoatIconController boatIconController
         )
     {
         _sailController = sailController;
@@ -38,6 +42,7 @@ public class BoatController : MonoBehaviour
         _graphPointsWrapper = graphPointsWrapper;
         _fokMaterialSwapper = fokMaterialSwapper;
         _grotMaterialSwapper = grotMaterialSwapper;
+        _boatIconController = boatIconController;
     }
     private void Start()
     {
@@ -63,8 +68,11 @@ public class BoatController : MonoBehaviour
         MoveBoat(foundBoatData.CalculatedBoatSpeedWithoutWindSpeed * windSpeed, leewayAngle);
         TurnBoat();
         _windIndicatorController.SetWindAngle(foundBoatData);
+        _boatIconController.SetWindAngle(foundBoatData);
+        _boatIconController.SetBoatHeading(transform.eulerAngles.y);
         graphDrawer.DrawUserPoint(foundBoatData, windSpeed);
         graphDrawer.UpdateGraphView(windSpeed);
+        boatSpeedText.text = "Prędkość łodzi [węzły]: " + currentSpeed.ToString("F1");
     }
 
     private void OnTriggerEnter(Collider other)

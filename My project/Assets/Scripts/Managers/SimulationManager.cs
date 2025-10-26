@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Statistics;
+using UnityEngine;
 
 public class SimulationManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class SimulationManager : MonoBehaviour
     public GraphDrawer graphDrawer;
     
     public WindIndicatorController windIndicatorController;
+    public BoatIconController boatIconController;
     
     private PhysicsModel _physicsModel;
     private GraphPointsWrapper _graphPointsWrapper;
@@ -47,7 +49,11 @@ public class SimulationManager : MonoBehaviour
         {
             grotMaterialSwapper.Initialize();
         }
-        
+
+        if (boatIconController != null)
+        {
+            boatIconController.Initialize();
+        }
         if (sailController != null)
         {
             sailController.Initialize();
@@ -55,7 +61,13 @@ public class SimulationManager : MonoBehaviour
         
         if (boatController != null)
         {
-            boatController.Initialize(_physicsModel, _windSystem, _graphPointsWrapper, sailController, fokMaterialSwapper, grotMaterialSwapper);
+            boatController.Initialize(_physicsModel, 
+                _windSystem,
+                _graphPointsWrapper, 
+                sailController,
+                fokMaterialSwapper, 
+                grotMaterialSwapper, 
+                boatIconController);
         }
         else
         {
