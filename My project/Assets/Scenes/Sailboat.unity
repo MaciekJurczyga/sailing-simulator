@@ -680,7 +680,7 @@ MonoBehaviour:
   fluctuationAmplitude: 5
   changeFrequency: 0.05
   averageWindAngle: 0
-  angleFluctuationAmplitude: 0
+  angleFluctuationAmplitude: 30
   angleChangeFrequency: 0.2
 --- !u!4 &27693096
 Transform:
