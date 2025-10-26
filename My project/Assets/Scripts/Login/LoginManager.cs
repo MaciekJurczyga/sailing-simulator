@@ -31,7 +31,7 @@ public class LoginManager : MonoBehaviour
         {
             if (feedbackText != null)
             {
-                feedbackText.text = "Login successful";
+                feedbackText.text = "Logowanie pomyślne";
                 feedbackText.color = Color.green;
             }
             
@@ -43,7 +43,7 @@ public class LoginManager : MonoBehaviour
             loginInput.text = "";
             if (feedbackText != null)
             {
-                feedbackText.text = "Incorrect login or password";
+                feedbackText.text = "Niepoprawny login lub hasło";
                 feedbackText.color = Color.red;
             }
         }
